@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.travelapp12.fragments.fragments.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_sightDetailFragment"
+            app:destination="@id/sightDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.travelapp12.fragments.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_sightDetailFragment"
+            app:destination="@id/sightDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sightDetailFragment"
+        android:name="com.example.travelapp12.fragments.fragments.SightDetailFragment"
+        android:label="SightDetailFragment"
+        tools:layout="@layout/fragment_sight_details">
+        <argument
+            android:name="sights"
+            app:argType="com.example.travelapp12.fragments.data.Sights"
+             />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.travelapp12.fragments.fragments.CartFragment"
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.travelapp12.fragments.loginRegistration.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.travelapp12.fragments.loginRegistration.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.travelapp12.fragments.fragments.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <action
+        android:id="@+id/action_profileFragment"
+        app:destination="@id/profileFragment" />
+    <fragment
+        android:id="@+id/loggedOutCartFragment"
+        android:name="com.example.travelapp12.fragments.fragments.LoggedOutCartFragment"
+        android:label="LoggedOutCartFragment"
+        tools:layout="@layout/fragment_cart_anlogged">
+        <action
+            android:id="@+id/action_loggedOutCartFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,260 @@
+@startuml
+left to right direction
+
+object AuthManager {
+    - isLoggedIn: Boolean
+    + isUserLoggedIn(): Boolean
+    + setUserLoggedIn(value: Boolean)
+}
+
+class MainActivity {
+    - navController: NavController
+    + onCreate(savedInstanceState: Bundle?)
+    - checkAuthAndNavigateProfile()
+    - checkAuthAndNavigateCart()
+    + onResume()
+}
+
+class MainCategoryFragment {
+    - dbref: DatabaseReference
+    - baseRecyclerView: RecyclerView
+    - baseArrayList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    - binding: FragmentBaseCategoryBinding
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - getActivityTypesData()
+}
+
+class ActiveFragment {
+    - dbref: DatabaseReference
+    - baseRecyclerView: RecyclerView
+    - baseArrayList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    - binding: FragmentBaseCategoryBinding
+    - adapter: BaseCategoryAdapter
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - getActivityTypesData()
+    - getSightsData(category: String)
+}
+
+class ArchitecturFragment {
+    - dbref: DatabaseReference
+    - baseRecyclerView: RecyclerView
+    - baseArrayList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    - binding: FragmentBaseCategoryBinding
+    - adapter: BaseCategoryAdapter
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - getActivityTypesData()
+    - getSightsData(category: String)
+}
+
+class CastlesFragment {
+    - dbref: DatabaseReference
+    - baseRecyclerView: RecyclerView
+    - baseArrayList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    - binding: FragmentBaseCategoryBinding
+    - adapter: BaseCategoryAdapter
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - getActivityTypesData()
+    - getSightsData(category: String)
+}
+
+class MuseumsFragment {
+    - dbref: DatabaseReference
+    - baseRecyclerView: RecyclerView
+    - baseArrayList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    - binding: FragmentBaseCategoryBinding
+    - adapter: BaseCategoryAdapter
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - getActivityTypesData()
+    - getSightsData(category: String)
+}
+
+class BaseCategoryAdapter {
+    - sightsList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    + onClick: (Sights) -> Unit
+    + onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
+    + getItemCount(): Int
+    + onBindViewHolder(holder: MyViewHolder, position: Int)
+    + updateData(newList: ArrayList<Sights>)
+    - MyViewHolder
+}
+
+class CartAdapter {
+    - cartList: ArrayList<CartSight>
+    - sightsList: ArrayList<Sights>
+    + onDeleteClickListener: (CartSight) -> Unit
+    + onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
+    + getItemCount(): Int
+    + onBindViewHolder(holder: MyViewHolder, position: Int)
+    + updateData(newList: ArrayList<CartSight>)
+    - updateFirebaseData(cartSight: CartSight)
+    - MyViewHolder
+}
+
+class CartFragment {
+    - binding: FragmentCartBinding
+    - recyclerView: RecyclerView
+    - cartAdapter: CartAdapter
+    - firebaseDataList: ArrayList<Sights>
+    - cartDataMap: MutableMap<String, CartSight>
+    - totalCost: Int
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+}
+
+class HomeFragment {
+    - binding: FragmentHomeBinding
+    - viewPager2Adapter: HomeViewPagerAdapter
+    - currentFragmentPosition: Int
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    + onResume()
+}
+
+class HomeViewPagerAdapter {
+    - fragments: List<Fragment>
+    + getItemCount(): Int
+    + createFragment(position: Int): Fragment
+    + getCurrentFragment(position: Int): Fragment
+}
+
+class ProfileFragment {
+    - binding: FragmentProfileBinding
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - showLogoutConfirmationDialog()
+    - logout()
+}
+
+class SearchFragment {
+    - binding: FragmentSearchBinding
+    - adapter: BaseCategoryAdapter
+    - sightsList: ArrayList<Sights>
+    - activityTypesMap: HashMap<String, String>
+    - dbref: DatabaseReference
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - searchByName(name: String)
+    - getSightsData()
+    - getActivityTypesData()
+}
+
+class SightDetailFragment {
+    - args: SightDetailFragmentArgs
+    - binding: FragmentSightDetailsBinding
+    - viewPagerAdapter: ViewPager2Images
+    - viewPager: ViewPager2
+    - activityTypesMap: HashMap<String, ActivityType>
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - loadActivityTypes()
+    - checkItemInCart(sightId: String, addButton: Button)
+}
+
+class LoginFragment {
+    - database: FirebaseDatabase
+    - binding: FragmentLoginBinding
+    - navController: NavController
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - signInUser(email: String, password: String)
+    - saveUserInfo(userId: String?, login: String?, email: String?)
+}
+
+class RegistrationFragment {
+    - database: FirebaseDatabase
+    - binding: FragmentRegistrationBinding
+    + onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    + onViewCreated(view: View, savedInstanceState: Bundle?)
+    - hashPassword(password: String): String
+    - checkLoginExists(login: String, callback: (Boolean) -> Unit)
+    - checkEmailExists(email: String, callback: (Boolean) -> Unit)
+}
+
+class ActivityType {
+    - acttype: String
+    - id_activtype: String
+}
+
+class Users {
+    - user_id: String?
+    - login: String?
+    - password: String?
+    - emailAddress: String?
+}
+
+class Sights {
+    - name: String?
+    - address: String?
+    - id_activtype: String?
+    - activityType: ActivityType?
+    - image: String?
+    - image2: String?
+    - description: String?
+    - cost: String?
+    - worktime: String?
+    - id_sights: String?
+}
+
+class CartSight {
+    - name: String?
+    - image: String?
+    - cost: String?
+    - count: String?
+    - sights_id: String?
+    - users_id: String?
+}
+
+class BaseCategoryFragment {
+    + onResume()
+}
+
+class ViewPager2Images {
+    - imageList: List<String>
+    + onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder
+    + onBindViewHolder(holder: MyViewHolder, position: Int)
+    + getItemCount(): Int
+    - MyViewHolder
+}
+
+ActiveFragment ..> BaseCategoryAdapter
+MainCategoryFragment ..> BaseCategoryAdapter
+ArchitecturFragment ..> BaseCategoryAdapter
+CastlesFragment ..> BaseCategoryAdapter
+MuseumsFragment ..> BaseCategoryAdapter
+SearchFragment ..> BaseCategoryAdapter
+ActiveFragment *-> Sights
+MainCategoryFragment *-> Sights
+ArchitecturFragment *-> Sights
+CastlesFragment *-> Sights
+MuseumsFragment *-> Sights
+SearchFragment *-> Sights
+SightDetailFragment *-> Sights
+BaseCategoryAdapter *-> Sights
+SightDetailFragment *-> ViewPager2Images
+Sights *-> ActivityType
+CartAdapter *-> CartSight
+CartFragment *-> CartAdapter
+CartFragment *-> Sights
+HomeFragment *-> HomeViewPagerAdapter
+HomeFragment *-> MainCategoryFragment
+HomeFragment *-> MuseumsFragment
+HomeFragment *-> ArchitecturFragment
+HomeFragment *-> ActiveFragment
+HomeFragment *-> CastlesFragment
+HomeViewPagerAdapter *-> Fragment
+LoginFragment *-> Users
+RegistrationFragment *-> Users
+MainActivity --> AuthManager
+
+@enduml
+
